@@ -44,9 +44,7 @@
 {/if}
 
 <style>
-	p:hover{
-		color:aqua;
-	}
+	
 	.wrap {
 		text-overflow: ellipsis;
 		white-space: nowrap;
