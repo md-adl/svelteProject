@@ -3,7 +3,6 @@
 	import { post } from '../store';
 	import { chooseAns } from '../store';
 	import { createEventDispatcher } from 'svelte';
-
 	const dispatch = createEventDispatcher();
 	export let show = true;
 	let postData = [];
@@ -17,8 +16,8 @@
 	const setCorrectValue = (i) => {
 		dispatch('changeIndex', i);
 	};
-	
-	console.log('wjdgwgewqhewu',$chooseAns)
+
+	console.log('wjdgwgewqhewu', $chooseAns);
 	$: data = $chooseAns.filter(Boolean);
 </script>
 
@@ -29,22 +28,19 @@
 			<p>unattempted : {11 - data.length}</p>
 		</div>
 		&nbsp;
-	
+
 		<div class="btn">
 			{#each postData as dataItem, i (dataItem)}
 				<p id="list{i}" class="wrap" on:click={setCorrectValue(i)}>
-						Q{i + 1}
-						{JSON.parse(dataItem.content_text).question}
-					</p>
-					
+					Q{i + 1}
+					{JSON.parse(dataItem.content_text).question}
+				</p>
 			{/each}
-		
 		</div>
 	</nav>
 {/if}
 
 <style>
-	
 	.wrap {
 		text-overflow: ellipsis;
 		white-space: nowrap;
