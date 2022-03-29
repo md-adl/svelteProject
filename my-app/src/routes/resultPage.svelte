@@ -5,7 +5,6 @@
 
 	let incorrectAns = 0;
 	let correctAns = 0;
-	let correctQuestion = [];
 	let score = 0;
 	let optionArray = ['A', 'B', 'C', 'D'];
 	let actualCorrectArr = [];

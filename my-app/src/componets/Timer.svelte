@@ -1,18 +1,18 @@
 
 <script>
 	import { tweened } from 'svelte/motion';
-	let original = 2 * 60; // TYPE NUMBER OF SECONDS HERE
-	let timer = tweened(original);
-	// ------ dont need to modify code below
+	let orig = 2 * 60;
+	let timer = tweened(orig);
+	
 	setInterval(() => {
 		if ($timer > 0) $timer--;
 	}, 1000);
-	$: minutes = Math.floor($timer / 60);
-	$: seconds = Math.floor($timer - minutes * 60);
+	$: minut = Math.floor($timer / 60);
+	$: sec = Math.floor($timer - minut * 60);
 </script>
 
-{#if minutes == 0 && seconds == 0}
-	<div class="mainModal">
+{#if minut == 0 && sec == 0}
+	<div class="timer">
 		<div class="modal">
 			<h3>Test Time is Over</h3>
 			<a href="/resultPage"><button>See Your Result</button></a>
@@ -20,12 +20,12 @@
 	</div>
 {:else}
 	<h4>
-		<span class="mins">{minutes}</span><span class="secs">:{seconds}</span>
+		<span class="mins">{minut}</span><span class="secs">:{sec}</span>
 	</h4>
 {/if}
 
 <style>
-	.mainModal {
+	.timer {
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
