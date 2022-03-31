@@ -1,4 +1,14 @@
 <script>
+		// @ts-nocheck
+	/**
+	 *	fileName  		: Result.svelte
+	 *	Description 	: After the giving the test you can see the result percentage and attempted and attempted
+	 *	Author   		: Mohammad Adil
+	 *	version 		: 1.0
+	 *	created 		: 31-march-2022;
+	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
+	 */
+
 	import Header from '../componets/Header.svelte';
 	import { chooseAns, userChecked, post, reviewFooter } from '../store';
 	import { onMount } from 'svelte';

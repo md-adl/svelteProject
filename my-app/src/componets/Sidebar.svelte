@@ -1,4 +1,14 @@
 <script>
+		// @ts-nocheck
+	/**
+	 *	fileName  		: sidebar.svelte
+	 *	Description 	: This component has if you click the list button you can see attempted and Unattempted question
+	 *	Author   		: Mohammad Adil
+	 *	version 		: 1.0
+	 *	created 		: 31-march-2022;
+	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
+	 */
+
 	import { fly } from 'svelte/transition';
 	import { post } from '../store';
 	import { chooseAns } from '../store';

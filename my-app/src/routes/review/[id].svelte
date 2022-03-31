@@ -53,9 +53,9 @@
 		{#each $post as data, i}
 			{#if pageNo == i}
 				<div class="question">
-					<h3>
+					<h6>
 						{i + 1} . {JSON.parse(data.content_text).question}
-					</h3>
+					</h6>
 					<div class="answer">
 						<div class="answerOption">
 							{#each JSON.parse(data.content_text).answers as answers, j}

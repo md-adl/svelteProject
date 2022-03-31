@@ -1,4 +1,12 @@
 <script>
+	/**
+	 *	fileName  		:  footer.svelte
+	 *	Description 	: showing Buuton Next and Prevoious you can go next question and previous question you can also end the test
+	 *	Author   		: Mohammad Adil
+	 *	version 		: 1.0
+	 *	created 		: 31-march-2022;
+	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
+	 */
 	import Sidebar from './Sidebar.svelte';
 	import { reviewFooter } from '../store';
 	import { onMount } from 'svelte';

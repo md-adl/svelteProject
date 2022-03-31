@@ -1,4 +1,12 @@
 <script>
+	/**
+	 *	fileName  		:  test.svelte
+	 *	Description 	:  this page have question ans answer you can give the test also showing the list of attemeted and Unattempted question
+	 *	Author   		: Mohammad Adil
+	 *	version 		: 1.0
+	 *	created 		: 31-march-2022;
+	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
+	 */
 	import { post, userChecked } from '../store';
 	import Footer from '../componets/Footer.svelte';
 	import { chooseAns } from '../store';
