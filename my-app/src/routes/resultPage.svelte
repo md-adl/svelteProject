@@ -73,7 +73,6 @@
 		}
 		if (j >= $userChecked.length) {
 			unselected[i] = i + 1;
-			// console.log('un', unselected);
 		}
 	}
 	$: data = $chooseAns.filter(Boolean);

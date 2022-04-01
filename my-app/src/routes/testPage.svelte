@@ -55,7 +55,6 @@
 			quetionId: quetionId
 		});
 		userChecked.set(userCheckedData);
-		// console.log('checked answer is', checkedAns);
 		for (i=0; i<=userCheckedData.length; i++){
 			
 		}
