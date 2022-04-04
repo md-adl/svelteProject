@@ -3,7 +3,8 @@
 
 <div class="head">
 	<div class="logo">
-		<img src="./ucertify.png" alt="logo" />
+		<img src="	https://www.ucertify.com/layout/themes/bootstrap4/images/logo/ucertify_logo.png
+		" alt="logo" />
 	</div>
 	<div class="head-content">uCertify Test Prep</div>
 </div>
@@ -28,5 +29,6 @@
 	img {
 		width: 100px;
 		height: 100%;
+		object-fit: contain;
 	}
 </style>

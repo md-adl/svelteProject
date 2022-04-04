@@ -8,16 +8,16 @@
 	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
 	 */
 	import Sidebar from './Sidebar.svelte';
-	import { reviewFooter } from '../store';
+	import { review_ftr } from '../store';
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import Timer from '../componets/Timer.svelte';
 	let sidebar_show = false;
 	let review;
-	export let qustionIdNo;
-	qustionIdNo = Number(qustionIdNo);
+	export let question_id;
+	question_id = Number(question_id);
 	onMount(() => {
-		reviewFooter.subscribe((value) => {
+		review_ftr.subscribe((value) => {
 			review = value;
 		});
 	});
@@ -34,10 +34,10 @@
 	}
 	const changeIndex = (event) => {
 		console.log('events are', event.detail);
-		dispatch('changeCorrectQues', event.detail);
+		dispatch('changecoorect_ques', event.detail);
 	};
 	const confirmBox = () => {
-		dispatch('confirmBoxs');
+		dispatch('modal');
 	};
 </script>
 
@@ -50,23 +50,25 @@
 					<button id="end" class="btn" on:click={confirmBox} accesskey="t">End Test</button>
 					{#if currentQue == 10}
 						<!-- svelte-ignore a11y-accesskey -->
-						<button id="nxt" class="btn" on:click={nextQuest} disabled >Next</button>
+						<button id="nxt" class="btn" on:click={nextQuest} disabled>Next</button>
 					{:else}
 						<!-- svelte-ignore a11y-accesskey -->
 						<button id="nxt" class="btn" on:click={nextQuest} accesskey="n">Next</button>
 					{/if}
-					     <div>
-							 <h4>{currentQue+1} of 11</h4>
-						 </div>
+					<div>
+						<h4>{currentQue + 1} of 11</h4>
+					</div>
 					{#if currentQue == 0}
 						<!-- svelte-ignore a11y-accesskey -->
-						<button id="prev" class="btn" on:click={prevQuest} disabled >Previous</button>
+						<button id="prev" class="btn" on:click={prevQuest} disabled>Previous</button>
 					{:else}
 						<!-- svelte-ignore a11y-accesskey -->
 						<button id="prev" class="btn" on:click={prevQuest} accesskey="p">Previous</button>
 					{/if}
 					<!-- svelte-ignore a11y-accesskey -->
-					<button class="btn" on:click={() => (sidebar_show = !sidebar_show)} accesskey="l">List</button>
+					<button class="btn" on:click={() => (sidebar_show = !sidebar_show)} accesskey="l"
+						>List</button
+					>
 					<div>
 						<Timer />
 					</div>
@@ -74,28 +76,29 @@
 				</div>
 			{:else}
 				<div>
-					{#if qustionIdNo == 10}
-						<button id="nxt" class="btn" on:click={nextQuest} disabled >Next</button>
+					{#if question_id == 10}
+						<button id="nxt" class="btn" on:click={nextQuest} disabled>Next</button>
 					{:else}
 						<!-- svelte-ignore a11y-accesskey -->
 						<button id="nxt" class="btn" on:click={nextQuest} accesskey="n">Next</button>
 					{/if}
-					  <div>
-						<h4>{qustionIdNo+1}of 11</h4>
-
-					  </div>
-					{#if qustionIdNo == 0}
+					<div>
+						<h4>{question_id + 1}of 11</h4>
+					</div>
+					{#if question_id == 0}
 						<button id="prev" class="btn" on:click={prevQuest} disabled>Previous</button>
 					{:else}
 						<!-- svelte-ignore a11y-accesskey -->
 						<button id="prev" class="btn" on:click={prevQuest} accesskey="p">Previous</button>
 					{/if}
 					<!-- svelte-ignore a11y-accesskey -->
-					<button class="btn" on:click={() => (sidebar_show = !sidebar_show)} accesskey="l" >List</button>
+					<button class="btn" on:click={() => (sidebar_show = !sidebar_show)} accesskey="l"
+						>List</button
+					>
 
 					<Sidebar bind:show={sidebar_show} on:changeIndex={changeIndex} />
 					<a href="/">
-					  <button class="btn">Dashboard</button>
+						<button class="btn">Restart</button>
 					</a>
 				</div>
 			{/if}

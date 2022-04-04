@@ -1,10 +1,8 @@
-import {writable} from 'svelte/store'
-    export const currentQues = writable(0);
-    // name="e"
-    export const post = writable([])
-    export const userChecked = writable([])
-    export const attempted = writable(0);
-    export const reviewFooter = writable(false)
-    export const chooseAns=writable([])
-    
-    
+import { writable } from 'svelte/store';
+export const current_ques = writable(0);
+// name="e"
+export const post = writable([]);
+export const user_chk = writable([]);
+export const attempted = writable(0);
+export const review_ftr = writable(false);
+export const choose__ans = writable([]);

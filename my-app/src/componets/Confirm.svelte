@@ -2,8 +2,8 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	const offBox = () => {
-		dispatch('offBox');
+	const close = () => {
+		dispatch('close');
 	};
 </script>
 
@@ -13,7 +13,7 @@
 		<a href="/resultPage">
 			<button class="btn">Yes</button>
 		</a>
-		<button class="btn" on:click={offBox}>No</button>
+		<button class="btn" on:click={close}>No</button>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@
 	button {
 		background: blue;
 	}
-	.btn{
+	.btn {
 		width: 50px;
 		color: white;
 	}

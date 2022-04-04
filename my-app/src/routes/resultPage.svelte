@@ -2,7 +2,7 @@
 		// @ts-nocheck
 	/**
 	 *	fileName  		: Result.svelte
-	 *	Description 	: After the giving the test you can see the result percentage and attempted and attempted
+	 *	Description 	: After the giving the test you can see the result percentage and 		                 	unattempted and attempted
 	 *	Author   		: Mohammad Adil
 	 *	version 		: 1.0
 	 *	created 		: 31-march-2022;
@@ -10,74 +10,74 @@
 	 */
 
 	import Header from '../componets/Header.svelte';
-	import { chooseAns, userChecked, post, reviewFooter } from '../store';
+	import { choose__ans, user_chk, post, review_ftr } from '../store';
 	import { onMount } from 'svelte';
 
-	let incorrectAns = 0;
-	let correctAns = 0;
+	let incorrect_ans = 0;
+	let coorect_ans = 0;
 	let score = 0;
-	let optionArray = ['A', 'B', 'C', 'D'];
-	let actualCorrectArr = [];
+	let option_arr = ['A', 'B', 'C', 'D'];
+	let actual_crt = [];
 
-	let answerChoosebyUser = [];
+	let answer_user = [];
 
 	$: for (let i = 0; i < $post.length; i++) {
-		let correctIndex = 0;
-		if ($chooseAns[i]) {
+		let correct_indx = 0;
+		if ($choose__ans[i]) {
 			for (let j = 0; j < 4; j++) {
-				if (JSON.parse($post[i].content_text).answers[j].answer == $chooseAns[i]) {
-					correctIndex = j;
+				if (JSON.parse($post[i].content_text).answers[j].answer == $choose__ans[i]) {
+					correct_indx = j;
 				}
 			}
 		} else {
-			correctIndex = null;
+			correct_indx = null;
 		}
-		answerChoosebyUser[i] = correctIndex;
+		answer_user[i] = correct_indx;
 	}
 
 	$: for (let i = 0; i < $post.length; i++) {
-		let actualCorrect = 0;
+		let actual_crct = 0;
 		for (let j = 0; j < 4; j++) {
 			if (JSON.parse($post[i].content_text).answers[j].is_correct == '1') {
-				actualCorrect = j;
+				actual_crct = j;
 			}
 		}
-		actualCorrectArr[i] = actualCorrect;
+		actual_crt[i] = actual_crct;
 	}
 
 	onMount(() => {
-		$userChecked.sort(function (a, b) {
-			return a.questionNumber - b.questionNumber;
+		$user_chk.sort(function (a, b) {
+			return a.question_nmbr - b.question_nmbr;
 		});
-		for (let i = 0; i < $userChecked.length; i++) {
-			if ($userChecked[i].userOptionCorrect == '1') {
-				correctAns = correctAns + 1;
-				console.log('hiii', correctAns);
+		for (let i = 0; i < $user_chk.length; i++) {
+			if ($user_chk[i].user_crct == '1') {
+				coorect_ans = coorect_ans + 1;
+				console.log('hiii', coorect_ans);
 			} else {
-				incorrectAns += 1;
+				incorrect_ans += 1;
 			}
-			score = ((correctAns / 11) * 100).toFixed(2);
+			score = ((coorect_ans / 11) * 100).toFixed(2);
 		}
 	});
 	let j;
 	let unselected = [];
 	let matched = [];
 	for (let i = 0; i < $post.length; i++) {
-		for (j = 0; j < $userChecked.length; j++) {
-			if (i + 1 == $userChecked[j].questionNumber) {
+		for (j = 0; j < $user_chk.length; j++) {
+			if (i + 1 == $user_chk[j].question_nmbr) {
 				matched[i] = i + 1;
 				break;
 			} else {
 				matched[i] = 0;
 			}
 		}
-		if (j >= $userChecked.length) {
+		if (j >= $user_chk.length) {
 			unselected[i] = i + 1;
 		}
 	}
-	$: data = $chooseAns.filter(Boolean);
+	$: data = $choose__ans.filter(Boolean);
 	const reviewPage=()=>{
-		reviewFooter.set(true)
+		review_ftr.set(true)
 	}
 </script>
 
@@ -87,11 +87,11 @@
 		<div class="header">
 			<div>
 				<h3>Correct</h3>
-				<p>{correctAns}</p>
+				<p>{coorect_ans}</p>
 			</div>
 			<div>
 				<h3>Incorrect</h3>
-				<p>{incorrectAns}</p>
+				<p>{incorrect_ans}</p>
 			</div>
 
 			<div>
@@ -105,7 +105,7 @@
 			</div>
 
 			<div>
-				<h3 class="totalResult">Total Result:</h3>
+				<h3 class="total_rslt">Total Result:</h3>
 				<p>{score}%</p>
 			</div>
 		</div>
@@ -118,12 +118,12 @@
 							<div class="question"><span>{i + 1}</span></div>
 							<p class="wrap">{JSON.parse(dataItem.content_text).question}</p>
 
-							<div class="resultOption">
-								{#each optionArray as optionData, j}
+							<div class="result_optn">
+								{#each option_arr as optionData, j}
 									<div
-										class="{`${actualCorrectArr[i] == j}`} option"
-										class:selected={actualCorrectArr[i] != answerChoosebyUser[i] &&
-										answerChoosebyUser[i] == j
+										class="{`${actual_crt[i] == j}`} option"
+										class:selected={actual_crt[i] != answer_user[i] &&
+										answer_user[i] == j
 											? true
 											: false}
 									>
@@ -131,9 +131,9 @@
 									</div>
 								{/each}
 
-								{#each $userChecked as selectQue}
-									{#if i + 1 == selectQue.questionNumber}
-										{#if selectQue.userOptionCorrect == 0}
+								{#each $user_chk as selectQue}
+									{#if i + 1 == selectQue.question_nmbr}
+										{#if selectQue.user_crct == 0}
 											<h3>InCorrect</h3>
 										{:else}
 											<h3>correct</h3>
@@ -196,7 +196,7 @@
 		border-radius: 3px;
 		text-align: center;
 	}
-	.resultOption {
+	.result_optn {
 		display: flex;
 		margin: 3px;
 	}

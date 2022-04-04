@@ -1,5 +1,5 @@
 <script>
-		// @ts-nocheck
+	// @ts-nocheck
 	/**
 	 *	fileName  		: sidebar.svelte
 	 *	Description 	: This component has if you click the list button you can see attempted and Unattempted question
@@ -11,7 +11,7 @@
 
 	import { fly } from 'svelte/transition';
 	import { post } from '../store';
-	import { chooseAns } from '../store';
+	import { choose__ans } from '../store';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 	export let show = true;
@@ -22,17 +22,16 @@
 			postData = value;
 		});
 	});
-	//     import {content_text} from 'data/jsonFile.json'\
 	const setCorrectValue = (i) => {
 		dispatch('changeIndex', i);
 	};
 
-	console.log('wjdgwgewqhewu', $chooseAns);
-	$: data = $chooseAns.filter(Boolean);
+	console.log('wjdgwgewqhewu', $choose__ans);
+	$: data = $choose__ans.filter(Boolean);
 </script>
 
 {#if show}
-	<nav transition:fly={{ x: -550, opacity: 1 }}>
+	<nav transition:fly={{ x: -550, opacity: 1 }} class="container">
 		<div>
 			<p>attempted :{data.length}</p>
 			<p>unattempted : {11 - data.length}</p>
@@ -76,5 +75,9 @@
 		flex-direction: column;
 		gap: 10px;
 		cursor: pointer;
+	}
+	.container {
+		border: 1px solid black;
+		margin-top: 47px;
 	}
 </style>

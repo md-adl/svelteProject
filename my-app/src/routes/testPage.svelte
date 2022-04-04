@@ -7,21 +7,21 @@
 	 *	created 		: 31-march-2022;
 	 *	updated by 		: Mohammad Adil   mohammad.adil@ucertify.com
 	 */
-	import { post, userChecked } from '../store';
+	import { post, user_chk } from '../store';
 	import Footer from '../componets/Footer.svelte';
-	import { chooseAns } from '../store';
+	import { choose__ans } from '../store';
 	import Confirm from '../componets/Confirm.svelte';
 	import { onMount } from 'svelte';
 	import Header from '../componets/Header.svelte';
 	let posts = [];
-	let currentQues = 0;
+	let current_ques = 0;
 	let data = false;
-	
-	let checkedAns = [];
-	$: chooseAns.update((items) => {
-		return [...checkedAns];
+
+	let checked_ans = [];
+	$: choose__ans.update((items) => {
+		return [...checked_ans];
 	});
-	let userCheckedData = [];
+	let user_chkData = [];
 
 	onMount(async () => {
 		const responce = await fetch(`data/jsonFile.json`);
@@ -31,41 +31,36 @@
 	});
 
 	const Incre = () => {
-		currentQues = currentQues + 1;
+		current_ques = current_ques + 1;
 	};
 
 	const decre = () => {
-		currentQues = currentQues - 1;
+		current_ques = current_ques - 1;
 	};
-	const questionAttempt = (i, index) => {
-		console.log(index);
+	const question_atmt = (i, index) => {
 		let id = JSON.parse(posts[i].content_text).answers[index].id;
 		console.log(id);
-		
-		 let userOptionCorrect = JSON.parse(posts[i].content_text).answers[index].is_correct;
-		let userOptionCheckedAns=index
-		let userCheckQuestion = JSON.parse(posts[i].content_text).question;
-		let quetionId = JSON.parse(posts[i].content_id);
-		let questionNumber = i + 1;
-		userCheckedData.push({
-			userOptionCorrect:userOptionCorrect,
-			userOptionCheckedAns: userOptionCheckedAns,
-			userCheckQuestion: userCheckQuestion,
-			questionNumber: questionNumber,
-			quetionId: quetionId
+		let user_crct = JSON.parse(posts[i].content_text).answers[index].is_correct;
+		let user_ansr = index;
+		let usercheck__que = JSON.parse(posts[i].content_text).question;
+		let question_id = JSON.parse(posts[i].content_id);
+		let question_nmbr = i + 1;
+		user_chkData.push({
+			user_crct: user_crct,
+			user_ansr: user_ansr,
+			usercheck__que: usercheck__que,
+			question_nmbr: question_nmbr,
+			question_id: question_id
 		});
-		userChecked.set(userCheckedData);
-		for (i=0; i<=userCheckedData.length; i++){
-			
-		}
+		user_chk.set(user_chkData);
 	};
-	const changeCorrectQues = (event) => {
-		currentQues = event.detail;
+	const changecoorect_ques = (event) => {
+		current_ques = event.detail;
 	};
-	const confirmBoxs = () => {
+	const modal = () => {
 		data = true;
 	};
-	const offBox = () => {
+	const close = () => {
 		data = false;
 	};
 </script>
@@ -74,20 +69,20 @@
 	<Header />
 	<div class="conatiner">
 		{#each posts as dataItem, i (dataItem)}
-			{#if currentQues == i}
+			{#if current_ques == i}
 				<h3 class="show-ques">{i + 1} {JSON.parse(dataItem.content_text).question}</h3>
 
 				{#each JSON.parse(dataItem.content_text).answers as ans, index (ans)}
 					<div class="answer">
 						<label>
 							<input
-								on:click={questionAttempt(i, index)}
+								on:click={question_atmt(i, index)}
 								type="radio"
 								name="ans"
 								id={ans.id}
 								class="selectAns"
 								value={ans.answer}
-								bind:group={checkedAns[i]}
+								bind:group={checked_ans[i]}
 							/>
 							{@html ans.answer}
 						</label>
@@ -101,13 +96,13 @@
 <Footer
 	on:updateCurrent={Incre}
 	on:updatePrev={decre}
-	currentQue={currentQues}
-	on:changeCorrectQues={changeCorrectQues}
-	on:confirmBoxs={confirmBoxs}
+	currentQue={current_ques}
+	on:changecoorect_ques={changecoorect_ques}
+	on:modal={modal}
 />
 {#if data}
 	<div class="confirm">
-		<Confirm on:offBox={offBox} />
+		<Confirm on:close={close} />
 	</div>
 {/if}
 

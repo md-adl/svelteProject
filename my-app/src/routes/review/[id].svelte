@@ -13,7 +13,7 @@
 	import Footer from '../../componets/Footer.svelte'
 	import {onDestroy} from 'svelte'
 
-    import { post, reviewFooter, userChecked,  } from '../../store';
+    import { post, review_ftr, user_chk,  } from '../../store';
     export let id;
 	let pageNo = Number(id); // change id(string) to id(number) page no. means storing 
 	let explanationAnswer; //
@@ -41,7 +41,7 @@
 		pageNo = pageNo-1
 	}
   onDestroy(()=>{
-	  reviewFooter.update((x) =>{
+	  review_ftr.update((x) =>{
 		  x=false;
 	  })
   })
@@ -49,7 +49,7 @@
 </script>
 <div class="reviewPage">
 	<Header />
-	<div class="questionsContainer">
+	<div class="question_cntr">
 		{#each $post as data, i}
 			{#if pageNo == i}
 				<div class="question">
@@ -88,9 +88,9 @@
 							</div>
 						{/if}
 					{/each}
-					{#each $userChecked as user}
-						{#if i + 1 == user.questionNumber}
-							{#if user.userOptionCorrect == '1'}
+					{#each $user_chk as user}
+						{#if i + 1 == user.question_nmbr}
+							{#if user.user_crct == '1'}
 								<div class="comparationResult">
 									<h3>Correct</h3>
 								</div>
@@ -107,8 +107,8 @@
     </div>
    <div>
 	   <Footer
-	           qustionIdNo = {pageNo}
-	           on:changeCorrectQues={updateQues}
+	           question_id = {pageNo}
+	           on:changecoorect_ques={updateQues}
 			   on:updateCurrent = {nextPage}
 			   on:updatePrev = {prevPage}
 	   />
@@ -125,7 +125,7 @@
 		flex-direction: column;
 		
 	}
-	.questionsContainer{
+	.question_cntr{
 		max-width: 600px;
 		height: 100vh;
 		margin: auto;

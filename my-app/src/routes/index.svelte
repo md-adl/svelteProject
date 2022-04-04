@@ -19,7 +19,8 @@
 		height: 27px;
 		border-radius: 7px;
 		border: 1px solid pink;
-		color: blue;
+		color: white;
+		background:blue;
 		position: fixed;
 		top: 50%;
 		left: 50%;
