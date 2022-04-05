@@ -15,7 +15,7 @@
 	import Header from '../componets/Header.svelte';
 	let posts = [];
 	let current_ques = 0;
-	let data = false;
+	let value = false;
 
 	let checked_ans = [];
 	$: choose__ans.update((items) => {
@@ -58,10 +58,10 @@
 		current_ques = event.detail;
 	};
 	const modal = () => {
-		data = true;
+		value = true;
 	};
 	const close = () => {
-		data = false;
+		value = false;
 	};
 </script>
 
@@ -100,7 +100,7 @@
 	on:changecoorect_ques={changecoorect_ques}
 	on:modal={modal}
 />
-{#if data}
+{#if value}
 	<div class="confirm">
 		<Confirm on:close={close} />
 	</div>
